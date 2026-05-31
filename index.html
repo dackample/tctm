@@ -157,7 +157,6 @@
             border-radius: 3px;
         }
 
-        /* ✅ 核心修复：上传框彻底隐藏，不显示路径 */
         .upload-area {
             flex: 1;
             position: relative;
@@ -166,6 +165,7 @@
             align-items: center;
             justify-content: center;
             min-height: 200px;
+            user-select: none;
         }
         .upload-area input[type="file"] {
             position: absolute;
@@ -175,16 +175,6 @@
             z-index: -1;
             overflow: hidden;
         }
-        .upload-area img {
-            max-width: 90%;
-            max-height: 85%;
-            display: none;
-            object-fit: contain;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
         .upload-btn {
             padding: 6px 12px;
             background: #4299e1;
@@ -193,6 +183,18 @@
             cursor: pointer;
             font-size: 14px;
             z-index: 2;
+        }
+
+        .upload-image {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            cursor: grab;
+            display: none;
         }
 
         .progress-row {
@@ -295,7 +297,7 @@
                 <div class="upload-area">
                     <input type="file" id="momentImg" accept="image/*">
                     <label class="upload-btn" for="momentImg">上传照片</label>
-                    <img id="momentPreview" alt="专注瞬间">
+                    <img class="upload-image" id="momentPreview">
                 </div>
             </div>
             <div class="card purple" style="height:250px">
@@ -309,7 +311,7 @@
                 <div class="upload-area">
                     <input type="file" id="workImg" accept="image/*">
                     <label class="upload-btn" for="workImg">上传作品</label>
-                    <img id="workPreview" alt="作品展示">
+                    <img class="upload-image" id="workPreview">
                 </div>
             </div>
         </div>
@@ -339,11 +341,23 @@
     <button class="btn" onclick="clearAll()">清空表单</button>
 </div>
 
-<script>
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e=e||self).html2canvas=t()}(this,function(){"use strict";var n,l,i,u,f,a,s,p,c,m,d,y,v,g,C,w,b,E,P,T,S,x,O,R,j,z,A,M,I,r,o,t,e,h={exports:{}};function n(e){return e.split("").reverse().join("")}function t(e){return e.replace(/\\/g,"/")}function i(e){return parseFloat(e)||0}function o(e){return e.toLowerCase()}function r(e){return e.trim()}function u(e){return e.filter(Boolean)}function f(e){return e.replace(/^\s+|\s+$/g,"")}function a(e){return/^\s*(?:\+|-)?\d+/.test(e)}function s(e){return e instanceof Element&&e.tagName==="HTML"}function p(e){return e instanceof Element&&e.tagName==="BODY"}function c(e){return e instanceof SVGElement||e instanceof Element&&e.namespaceURI==="http://www.w3.org/2000/svg"}function m(e){return e instanceof HTMLCanvasElement}function d(e){return e instanceof HTMLImageElement}function y(e){return e instanceof HTMLVideoElement}function v(e){return e instanceof Element&&e.tagName==="IFRAME"}function g(e){return e instanceof Element&&e.tagName==="SCRIPT"}function C(e){return e instanceof Element&&e.tagName==="CANVAS"}function w(e){return e instanceof Element&&e.tagName==="SVG"}function b(e){return e instanceof Element&&e.tagName==="IMG"}function E(e){return e instanceof Element&&e.tagName==="VIDEO"}function P(e){return e instanceof Element&&e.tagName==="TEXT"}function T(e){return e instanceof Element&&e.tagName==="PATH"}function S(e){return e instanceof Element&&e.tagName==="CANVAS"}function x(e){return e instanceof Element&&e.tagName==="INPUT"}function O(e){return e instanceof Element&&e.tagName==="TEXTAREA"}function R(e){return e instanceof Element&&e.tagName==="SELECT"}function j(e){return e instanceof Element&&e.tagName==="OPTION"}function z(e){return e instanceof Element&&e.tagName==="PROGRESS"}function A(e){return e instanceof Element&&e.tagName==="VIDEO"}function M(e){return e instanceof Element&&e.tagName==="AUDIO"}function I(e){return e instanceof Element&&e.tagName==="IFRAME"}function k(e,t){var n=e.ownerDocument.defaultView.getComputedStyle(e,null);return t?n.getPropertyValue(t):n}function B(e,t){return e.style.getPropertyValue(t)}function N(e,t){return e.style.getPropertyPriority(t)}function D(e,t,n,i){e.style.setProperty(t,n,i)}function H(e,t){e.style.removeProperty(t)}function L(e,t){return e.getAttribute(t)}function F(e,t,n){e.setAttribute(t,n)}function q(e){return e.parentNode}function G(e){return e.firstChild}function J(e){return e.nextSibling}function K(e){return e.previousSibling}function Q(e){return e instanceof Element}function U(e){return e instanceof Text}function V(e){return e instanceof Comment}function W(e){return e instanceof Node}function X(e){return e instanceof HTMLDocument}function Y(e){return e instanceof DocumentFragment}function Z(e){return e instanceof DOMParser}function $(e){return e instanceof XMLSerializer}function _(e){return e instanceof Range}function ee(e){return e instanceof HTMLElement}function tn(e){return e instanceof HTMLHtmlElement}function nn(e){return e instanceof HTMLBodyElement}function on(e){return e instanceof HTMLHeadingElement}function rn(e){return e instanceof HTMLParagraphElement}function un(e){return e instanceof HTMLSpanElement}function fn(e){return e instanceof HTMLDivElement}function an(e){return e instanceof HTMLImageElement}function sn(e){return e instanceof HTMLCanvasElement}function pn(e){return e instanceof HTMLVideoElement}function cn(e){return e instanceof HTMLIFrameElement}function mn(e){return e instanceof HTMLScriptElement}function dn(e){return e instanceof HTMLStyleElement}function yn(e){return e instanceof SVGElement}function vn(e){return e instanceof SVGSVGElement}function gn(e){return e instanceof SVGGElement}function Cn(e){return e instanceof SVGPathElement}function wn(e){return e instanceof SVGImageElement}function bn(e){return e instanceof SVGTextElement}function En(e){return e instanceof SVGTSpanElement}function Pn(e){return e instanceof SVGLineElement}function Tn(e){return e instanceof SVGRectElement}function Sn(e){return e instanceof SVGCircleElement}function xn(e){return e instanceof SVGEllipseElement}function On(e){return e instanceof SVGPolygonElement}function Rn(e){return e instanceof SVGPolylineElement}function jn(e){return e instanceof SVGDefsElement}function zn(e){return e instanceof SVGLinearGradientElement}function An(e){return e instanceof SVGRadialGradientElement}function Mn(e){return e instanceof SVGStopElement}function In(e){return e instanceof SVGClipPathElement}function kn(e){return e instanceof SVGMaskElement}function Bn(e){return e instanceof SVGPatternElement}function Nn(e){return e instanceof SVGForeignObjectElement}function Dn(e){return e instanceof SVGMarkerElement}function Hn(e){return e instanceof SVGUseElement}function Ln(e){return e instanceof SVGSymbolElement}function Fn(e){return e instanceof HTMLTableCellElement}function qn(e){return e instanceof HTMLTableElement}function Gn(e){return e instanceof HTMLTableRowElement}function Jn(e){return e instanceof HTMLTableSectionElement}function Kn(e){return e instanceof HTMLTableColElement}function Qn(e){return e instanceof HTMLTableCaptionElement}function Un(e){return e instanceof HTMLUListElement}function Vn(e){return e instanceof HTMLOListElement}function Wn(e){return e instanceof HTMLLIElement}function Xn(e){return e instanceof HTMLAnchorElement}function Yn(e){return e instanceof HTMLButtonElement}function Zn(e){return e instanceof HTMLInputElement}function $n(e){return e instanceof HTMLTextAreaElement}function _n(e){return e instanceof HTMLSelectElement}function en(e){return e instanceof HTMLOptionElement}function tn(e){return e instanceof HTMLProgressElement}function nn(e){return e instanceof HTMLMeterElement}function on(e){return e instanceof HTMLDetailsElement}function rn(e){return e instanceof HTMLSummaryElement}function un(e){return e instanceof HTMLMenuElement}function fn(e){return e instanceof HTMLMenuItemElement}function an(e){return e instanceof HTMLDialogElement}function sn(e){return e instanceof HTMLSlotElement}function pn(e){return e instanceof HTMLTemplateElement}function cn(e){return e instanceof HTMLPictureElement}function mn(e){return e instanceof HTMLSourceElement}function dn(e){return e instanceof HTMLImageElement}function yn(e){return e instanceof HTMLVideoElement}function vn(e){return e instanceof HTMLAudioElement}function gn(e){return e instanceof HTMLTrackElement}function Cn(e){return e instanceof HTMLIFrameElement}function wn(e){return e instanceof HTMLScriptElement}function bn(e){return e instanceof HTMLStyleElement}function En(e){return e instanceof SVGElement}function Pn(e){return e instanceof SVGSVGElement}function Tn(e){return e instanceof SVGGElement}function Sn(e){return e instanceof SVGPathElement}function xn(e){return e instanceof SVGImageElement}function On(e){return e instanceof SVGTextElement}function Rn(e){return e instanceof SVGTSpanElement}function jn(e){return e instanceof SVGLineElement}function zn(e){return e instanceof SVGRectElement}function An(e){return e instanceof SVGCircleElement}function Mn(e){return e instanceof SVGEllipseElement}function In(e){return e instanceof SVGPolygonElement}function kn(e){return e instanceof SVGPolylineElement}function Bn(e){return e instanceof SVGDefsElement}function Nn(e){return e instanceof SVGLinearGradientElement}function Dn(e){return e instanceof SVGRadialGradientElement}function Hn(e){return e instanceof SVGStopElement}function Ln(e){return e instanceof SVGClipPathElement}function Fn(e){return e instanceof SVGMaskElement}function qn(e){return e instanceof SVGPatternElement}function Gn(e){return e instanceof SVGForeignObjectElement}function Jn(e){return e instanceof SVGMarkerElement}function Kn(e){return e instanceof SVGUseElement}function Qn(e){return e instanceof SVGSymbolElement}function Un(e){return e instanceof HTMLDocument}function Vn(e){return e instanceof DocumentFragment}function Wn(e){return e instanceof DOMParser}function Xn(e){return e instanceof XMLSerializer}function Yn(e){return e instanceof Range}function Zn(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function $n(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function _n(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function en(e,t,n){return _n(e,""+t,n)}function tn(e,t){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],function(){})),!0}catch(e){return!1}}function nn(e,t,n){return function(){if(e){var o={}.toString.call(t).slice(8,-1);if("Object"!==o&&"Function"!==o)throw new TypeError("Super expression must either be null or a function");}return e=function(){},o=t,n=Reflect.construct(t,arguments,e),function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}(o,e),o}}(e,t,n)}function on(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&en(e,"__proto__",t)}function rn(e){return e.split("-").map(function(e,t){return t?e.charAt(0).toUpperCase()+e.slice(1):e}).join("")}function un(e){return e.map(function(e){return e[0].toUpperCase()+e.slice(1)}).join("")}function fn(e){return e.map(function(e){return e.toLowerCase()}).join("")}function an(e){return e.map(function(e){return e.toUpperCase()}).join("")}function sn(e){return e.map(function(e){return e.charAt(0).toUpperCase()+e.slice(1)}).join("")}function pn(e){return e.map(function(e){return e.charAt(0).toLowerCase()+e.slice(1)}).join("")}function cn(e){return e.map(function(e){return e.replace(/\s+/g,"-")}).join("")}function mn(e){return e.map(function(e){return e.replace(/-/g," ")}).join("")}function dn(e){return e.map(function(e){return e.replace(/\s+/g,"")}).join("")}function yn(e){return e.map(function(e){return e.replace(/([A-Z])/g,"-$1").toLowerCase()}).join("")}function vn(e){return e.map(function(e){return e.replace(/-([a-z])/g,function(e,t){return t.toUpperCase()})}).join("")}function gn(e){return e.map(function(e){return e.replace(/([A-Z])/g," $1").toLowerCase()}).join("")}function Cn(e){return e.map(function(e){return e.replace(/\s([a-z])/g,function(e,t){return t.toUpperCase()})}).join("")}function wn(e){return e.map(function(e){return e.replace(/^\s+|\s+$/g,"")}).join("")}function bn(e){return e.map(function(e){return e.replace(/\s+/g," ")}).join("")}function En(e){return e.map(function(e){return e.replace(/^\s+|\s+$/g,"").replace(/\s+/g," ")}).join("")}function Pn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9]/g,"")}).join("")}function Tn(e){return e.map(function(e){return e.replace(/[^a-zA-Z]/g,"")}).join("")}function Sn(e){return e.map(function(e){return e.replace(/[^0-9]/g,"")}).join("")}function xn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s]/g,"")}).join("")}function On(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-]/g,"")}).join("")}function Rn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-_.]/g,"")}).join("")}function jn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-_.]/g,"").toLowerCase()}).join("")}function zn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-_.]/g,"").toUpperCase()}).join("")}function An(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-_.]/g,"").charAt(0).toUpperCase()+e.slice(1)}).join("")}function Mn(e){return e.map(function(e){return e.replace(/[^a-zA-Z0-9\s-_.]/g,"").charAt(0).toLowerCase()+e.slice(1)}).join("")}function In(e){return e.map(function(e){return e.replace(/\b\w/g,function(e){return e.toUpperCase()})}).join("")}function kn(e){return e.map(function(e){return e.replace(/\b\w/g,function(e){return e.toLowerCase()})}).join("")}function Bn(e){return e.map(function(e){return e.replace(/\B\w/g,function(e){return e.toUpperCase()})}).join("")}function Nn(e){return e.map(function(e){return e.replace(/\B\w/g,function(e){return e.toLowerCase()})}).join("")}function Dn(e){return e.map(function(e){return e.replace(/\b\w+\b/g,function(e){return e.charAt(0).toUpperCase()+e.slice(1).toLowerCase()})}).join("")}function Hn(e){return e.map(function(e){return e.replace(/\b\w+\b/g,function(e){return e.charAt(0).toLowerCase()+e.slice(1).toUpperCase()})}).join("")}function Ln(e){return e.map(function(e){return e.replace(/\b\w{1}\b/g,function(e){return e.toUpperCase()})}).join("")}function Fn(e){return e.map(function(e){return e.replace(/\b\w{1}\b/g,function(e){return e.toLowerCase()})}).join("")}function qn(e){return e.map(function(e){return e.replace(/\b\w{2}\b/g,function(e){return e.toUpperCase()})}).join("")}function Gn(e){return e.map(function(e){return e.replace(/\b\w{2}\b/g,function(e){return e.toLowerCase()})}).join("")}function Jn(e){return e.map(function(e){return e.replace(/\b\w{3}\b/g,function(e){return e.toUpperCase()})}).join("")}function Kn(e){return e.map(function(e){return e.replace(/\b\w{3}\b/g,function(e){return e.toLowerCase()})}).join("")}function Qn(e){return e.map(function(e){return e.replace(/\b\w{4}\b/g,function(e){return e.toUpperCase()})}).join("")}function Un(e){return e.map(function(e){return e.replace(/\b\w{4}\b/g,function(e){return e.toLowerCase()})}).join("")}function Vn(e){return e.map(function(e){return e.replace(/\b\w{5}\b/g,function(e){return e.toUpperCase()})}).join("")}function Wn(e){return e.map(function(e){return e.replace(/\b\w{5}\b/g,function(e){return e.toLowerCase()})}).join("")}function Xn(e){return e.map(function(e){return e.replace(/\b\w{6}\b/g,function(e){return e.toUpperCase()})}).join("")}function Yn(e){return e.map(function(e){return e.replace(/\b\w{6}\b/g,function(e){return e.toLowerCase()})}).join("")}function Zn(e){return e.map(function(e){return e.replace(/\b\w{7}\b/g,function(e){return e.toUpperCase()})}).join("")}function $n(e){return e.map(function(e){return e.replace(/\b\w{7}\b/g,function(e){return e.toLowerCase()})}).join("")}function _n(e){return e.map(function(e){return e.replace(/\b\w{8}\b/g,function(e){return e.toUpperCase()})}).join("")}function en(e){return e.map(function(e){return e.replace(/\b\w{8}\b/g,function(e){return e.toLowerCase()})}).join("")}function tn(e){return e.map(function(e){return e.replace(/\b\w{9}\b/g,function(e){return e.toUpperCase()})}).join("")}function nn(e){return e.map(function(e){return e.replace(/\b\w{9}\b/g,function(e){return e.toLowerCase()})}).join("")}function on(e){return e.map(function(e){return e.replace(/\b\w{10}\b/g,function(e){return e.toUpperCase()})}).join("")}function rn(e){return e.map(function(e){return e.replace(/\b\w{10}\b/g,function(e){return e.toLowerCase()})}).join("")}function un(e){return e.map(function(e){return e.replace(/\b\w{11}\b/g,function(e){return e.toUpperCase()})}).join("")}function fn(e){return e.map(function(e){return e.replace(/\b\w{11}\b/g,function(e){return e.toLowerCase()})}).join("")}function an(e){return e.map(function(e){return e.replace(/\b\w{12}\b/g,function(e){return e.toUpperCase()})}).join("")}function sn(e){return e.map(function(e){return e.replace(/\b\w{12}\b/g,function(e){return e.toLowerCase()})}).join("")}function pn(e){return e.map(function(e){return e.replace(/\b\w{13}\b/g,function(e){return e.toUpperCase()})}).join("")}function cn(e){return e.map(function(e){return e.replace(/\b\w{13}\b/g,function(e){return e.toLowerCase()})}).join("")}function mn(e){return e.map(function(e){return e.replace(/\b\w{14}\b/g,function(e){return e.toUpperCase()})}).join("")}function dn(e){return e.map(function(e){return e.replace(/\b\w{14}\b/g,function(e){return e.toLowerCase()})}).join("")}function yn(e){return e.map(function(e){return e.replace(/\b\w{15}\b/g,function(e){return e.toUpperCase()})}).join("")}function vn(e){return e.map(function(e){return e.replace(/\b\w{15}\b/g,function(e){return e.toLowerCase()})}).join("")}function gn(e){return e.map(function(e){return e.replace(/\b\w{16}\b/g,function(e){return e.toUpperCase()})}).join("")}function Cn(e){return e.map(function(e){return e.replace(/\b\w{16}\b/g,function(e){return e.toLowerCase()})}).join("")}function wn(e){return e.map(function(e){return e.replace(/\b\w{17}\b/g,function(e){return e.toUpperCase()})}).join("")}function bn(e){return e.map(function(e){return e.replace(/\b\w{17}\b/g,function(e){return e.toLowerCase()})}).join("")}function En(e){return e.map(function(e){return e.replace(/\b\w{18}\b/g,function(e){return e.toUpperCase()})}).join("")}function Pn(e){return e.map(function(e){return e.replace(/\b\w{18}\b/g,function(e){return e.toLowerCase()})}).join("")}function Tn(e){return e.map(function(e){return e.replace(/\b\w{19}\b/g,function(e){return e.toUpperCase()})}).join("")}function Sn(e){return e.map(function(e){return e.replace(/\b\w{19}\b/g,function(e){return e.toLowerCase()})}).join("")}function xn(e){return e.map(function(e){return e.replace(/\b\w{20}\b/g,function(e){return e.toUpperCase()})}).join("")}function On(e){return e.map(function(e){return e.replace(/\b\w{20}\b/g,function(e){return e.toLowerCase()})}).join("")}return e.exports}();
-</script>
+<!-- 正确引入 html2canvas -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
+// 图片缩放 + 始终居中 + 等比例
+function initImageResize(imgId) {
+    const img = document.getElementById(imgId);
+    let scale = 1;
+    img.onwheel = function (e) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.05 : 0.05;
+        scale = Math.max(0.2, Math.min(5, scale + delta));
+        img.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    };
+}
+
+// 评语系统
 const commentLib = {
     excellent:["上课专注投入，理解能力出众，课堂任务总能高效完成。","逻辑思维极强，思路清晰，自主创作能力十分突出。","创意丰富独特，作品设计新颖亮眼。","遇事沉稳冷静，可独立排查问题，实操能力优秀。","积极参与课堂互动，乐于分享自信大方。"],
     normal:["课堂态度端正，认真听讲，按时完成基础任务。","具备基础逻辑思维，复杂内容需稍加引导。","学习态度踏实稳重，心态端正。","稳步吸收知识，长期坚持即可稳步提升。"],
@@ -363,6 +377,7 @@ typeSel.onchange = function(){
 };
 listSel.onchange = function(){if(this.value)msgArea.value=this.value;};
 
+// 能力表格
 const tableBody = document.getElementById("abilityTable");
 for(let i=0;i<5;i++){
     let tr=document.createElement("tr");
@@ -387,29 +402,38 @@ document.querySelectorAll(".star-input").forEach((inp,idx)=>{
     inp.oninput=up;up();
 });
 
-document.getElementById("momentImg").onchange=e=>{
-    let f=e.target.files[0];if(!f)return;
-    let r=new FileReader();r.onload=ev=>{
+// 上传预览
+document.getElementById("momentImg").onchange = e => {
+    let f = e.target.files[0]; if (!f) return;
+    let r = new FileReader();
+    r.onload = ev => {
         let img = document.getElementById("momentPreview");
         img.src = ev.target.result;
         img.style.display = "block";
-    };r.readAsDataURL(f);
+        img.style.transform = "translate(-50%, -50%) scale(1)";
+    };
+    r.readAsDataURL(f);
 };
-document.getElementById("workImg").onchange=e=>{
-    let f=e.target.files[0];if(!f)return;
-    let r=new FileReader();r.onload=ev=>{
+document.getElementById("workImg").onchange = e => {
+    let f = e.target.files[0]; if (!f) return;
+    let r = new FileReader();
+    r.onload = ev => {
         let img = document.getElementById("workPreview");
         img.src = ev.target.result;
         img.style.display = "block";
-    };r.readAsDataURL(f);
+        img.style.transform = "translate(-50%, -50%) scale(1)";
+    };
+    r.readAsDataURL(f);
 };
 
+// 进度条
 function bindPro(inpId,barId){
     let inp=document.getElementById(inpId),bar=document.getElementById(barId);
     inp.oninput=()=>{let v=Math.max(0,Math.min(100,parseInt(inp.value)||0));inp.value=v;bar.style.width=v+"%";};
 }
 bindPro("bkPercent","bkBar");bindPro("buildPercent","buildBar");bindPro("codePercent","codeBar");
 
+// 清空
 function clearAll(){
     document.querySelectorAll("input,textarea").forEach(x=>x.value="");
     document.getElementById("classTime").value=new Date().toISOString().slice(0,16);
@@ -424,29 +448,26 @@ function clearAll(){
     typeSel.selectedIndex=0;listSel.innerHTML='<option value="">先选择等级</option>';
 }
 
-function generateReport(){
-    let img1 = document.getElementById('momentPreview');
-    let img2 = document.getElementById('workPreview');
-    img1.crossOrigin = 'anonymous';
-    img2.crossOrigin = 'anonymous';
+// ✅ 生成图片（修复完成）
+async function generateReport(){
+    const container = document.getElementById('report-container');
 
-    setTimeout(() => {
-        html2canvas(document.getElementById("report-container"), {
-            scale: 2,
-            useCORS: true,
-            allowTaint: false,
-            backgroundColor: "#fff"
-        }).then(canvas => {
-            let a = document.createElement('a');
-            a.download = "课堂记录反馈.png";
-            a.href = canvas.toDataURL("image/png");
-            a.click();
-            alert("报告生成成功！图片已出现！");
-        }).catch(err => {
-            alert("生成失败：" + err.message);
-        });
-    }, 600);
+    const canvas = await html2canvas(container, {
+        scale: 2,
+        useCORS: true,
+        logging: false
+    });
+
+    const link = document.createElement('a');
+    link.download = '课堂记录反馈.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    alert('报告生成成功！');
 }
+
+// 初始化
+initImageResize("momentPreview");
+initImageResize("workPreview");
 </script>
 </body>
 </html>
