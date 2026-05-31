@@ -168,8 +168,12 @@
             justify-content: center;
         }
         .upload-area input[type="file"] {
-            position: absolute;
-            z-index: 1;
+           position: absolute;
+           z-index: 1;
+           opacity: 0;          /* 完全透明，隐藏文件名 */
+           width: 100%;
+           height: 100%;
+           cursor: pointer;     /* 鼠标放上去显示手型，提示可点击 */
         }
         .upload-area img {
             max-width: 90%;
