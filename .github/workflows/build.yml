@@ -30,7 +30,7 @@ jobs:
             --name "我的应用" \
             --icon=icon.icns \
             --add-data "data_folder:data_folder" \   # 如有需要
-            my_app.py
+            1.py
         # 参数说明：
         # --windowed      生成 .app 图形界面程序（无终端窗口）
         # --name          指定 App 名称
