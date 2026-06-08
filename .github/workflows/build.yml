@@ -1,0 +1,44 @@
+name: Build macOS App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:   # 允许手动触发
+
+jobs:
+  build:
+    runs-on: macos-latest   # 使用 macOS 运行环境
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pyinstaller
+
+      - name: 用 PyInstaller 打包为 .app
+        run: |
+          pyinstaller --windowed \
+            --name "我的应用" \
+            --icon=icon.icns \
+            --add-data "data_folder:data_folder" \   # 如有需要
+            my_app.py
+        # 参数说明：
+        # --windowed      生成 .app 图形界面程序（无终端窗口）
+        # --name          指定 App 名称
+        # --icon          指定图标（.icns 格式）
+        # --add-data      打包额外文件（格式：源路径:目标路径）
+
+      - name: 上传 .app 包
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyApp-macOS
+          path: dist/我的应用.app
