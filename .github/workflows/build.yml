@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest   # 使用 macOS 运行环境
+    runs-on: macos-latest
 
     steps:
       - name: 检出代码
@@ -26,18 +26,14 @@ jobs:
 
       - name: 用 PyInstaller 打包为 .app
         run: |
-          pyinstaller --windowed \
-            --name "我的应用" \
-            --icon=icon.icns \
-            --add-data "data_folder:data_folder" \   # 如有需要
-            1.py
-        # 参数说明：
-        # --windowed      生成 .app 图形界面程序（无终端窗口）
-        # --name          指定 App 名称
-        # --icon          指定图标（.icns 格式）
-        # --add-data      打包额外文件（格式：源路径:目标路径）
+          # 如果图标文件 icon.icns 存在，就使用它
+          ICON_ARG=""
+          if [ -f icon.icns ]; then
+            ICON_ARG="--icon icon.icns"
+          fi
+          pyinstaller --windowed --name "我的应用" $ICON_ARG 1.py
 
-      - name: 上传 .app 包
+      - name: 上传生成的 .app
         uses: actions/upload-artifact@v4
         with:
           name: MyApp-macOS
